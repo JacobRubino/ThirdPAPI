@@ -22,21 +22,22 @@ let scheduleArr = [
   block4,
   block5,
 ]
+
 function setCalColor (){
   for (let index = 0; index < scheduleArr.length; index++) {
     // let childText = scheduleArr[index].children().first().text()
     // console.log(childText)
-    var x = scheduleArr[index]
+    var x = scheduleArr[index].get(0)
     let time_now = dayjs().format('h')
     blockCol = scheduleArr[index].data('hour')
-    console.log(scheduleArr[index][0].classList)
+    console.log(x)
     // if i set them all as future by default would i only have to loop until i reach the present?
     if (blockCol < Number(time_now)){ //in the past
         x.classList.add("past")      
     } else if(blockCol === Number(time_now)){
-        x.classlist.add("present")
+      x.classList.add("present")
     } else{   
-        x.classList.add("future")
+      x.classList.add("future")
     }
   }
 }
