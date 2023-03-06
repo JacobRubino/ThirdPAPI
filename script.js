@@ -1,18 +1,17 @@
+let timeSec = document.querySelectorAll(`[class*="time-block"]`);
+let headTimer = document.querySelector('#currentDay')
 
-var timeSec = document.querySelectorAll(`[class*="time-block"]`);
-var headTimer = document.querySelector('#currentDay')
+let block9 = $('#hour-9')
+let block10 = $('#hour-10')
+let block11 = $('#hour-11')
+let block12 = $('#hour-12')
+let block1 = $('#hour-13')
+let block2 = $('#hour-14')
+let block3 = $('#hour-15')
+let block4 = $('#hour-16')
+let block5 = $('#hour-17')
 
-var block9 = $('#hour-9')
-var block10 = $('#hour-10')
-var block11 = $('#hour-11')
-var block12 = $('#hour-12')
-var block1 = $('#hour-13')
-var block2 = $('#hour-14')
-var block3 = $('#hour-15')
-var block4 = $('#hour-16')
-var block5 = $('#hour-17')
-
-var scheduleArr = [
+let scheduleArr = [
   block9,
   block10,
   block11,
@@ -23,26 +22,29 @@ var scheduleArr = [
   block4,
   block5,
 ]
-for (let index = 0; index < scheduleArr.length; index++) {
-  var childText = scheduleArr[index].children().first().text()
-  console.log(childText)
-  var time_now = dayjs().format('hA')
-  console.log(time_now)
-  childText.diff(time_now,'hour')
-  
+function setCalColor (){
+  for (let index = 0; index < scheduleArr.length; index++) {
+    // let childText = scheduleArr[index].children().first().text()
+    // console.log(childText)
+    var x = scheduleArr[index]
+    let time_now = dayjs().format('h')
+    blockCol = scheduleArr[index].data('hour')
+    console.log(scheduleArr[index][0].classList)
+    // if i set them all as future by default would i only have to loop until i reach the present?
+    if (blockCol < Number(time_now)){ //in the past
+        x.classList.add("past")      
+    } else if(blockCol === Number(time_now)){
+        x.classlist.add("present")
+    } else{   
+        x.classList.add("future")
+    }
+  }
 }
-console.log()
-
 function current_time(){
-  var today = dayjs();
+  let today = dayjs();
   $('#currentDay').text(today.format('MMM D, YYYY')); 
 }
 
-// make a function that finds out what color they need to be, if theres a way to target later ids without looping maybe, but will probably end up just using the textcontent thats set to its time comparing it to the current time 
-function Color_cal(){
-
-
-}
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
@@ -69,3 +71,4 @@ $(function () {
   // TODO: Add code to display the current date in the header of the page.
 });
 current_time()
+setCalColor()
